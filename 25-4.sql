@@ -61,5 +61,33 @@ value
 -- Nó báo lỗi Duplicate bởi vì ban đầu ở bảng Customers chúng ta đã có unique nó bắt buộc
 -- mỗi khách hàng phải có gmail riêng và không trùng nhau
 
+-- 27/4
+-- 1. In ra danh sách các cuốn sách thuộc thể loại "Trinh thám" CÓ giá bán dưới 100.000đ.
+select * from Books 
+where category = 'Trinh thám' and price > 100000;
+
+-- 2. Tìm những khách hàng sử dụng email của Google.
+select * from Customers 
+where email like '%@gmail.com';
+-- LIKE nó như toán tử so sánh tương đối á 
+-- còn '%@gmail.com'; thì % có nghĩa là 1 chuỗi ký tự kèm theo sau đó là @gmail.com
+
+-- 3. Lấy ra top 3 cuốn sách đắt tiền nhất trong cửa hàng.
+select * from Books 
+order by price desc
+limit 3;
+-- order by dùng để sắp xếp
+-- desc là giảm dần 
+-- limit 3 lấy ra 3 cái đầu tiên => lấy đc 3 cuốn giá cao nhất
+
+-- 4. Nhân dịp lễ lớn, nhà sách giảm giá 10% cho TẤT CẢ sách được xuất bản trước năm 2020. 
+-- Hãy viết lệnh để thực hiện việc cập nhật giá đồng loạt.
+set SQL_SAFE_UPDATES = 0;
+update Books
+set price = price * 0.9
+where publish_year < 2022;
+set SQL_SAFE_UPDATES = 1;
+
+
 
 
